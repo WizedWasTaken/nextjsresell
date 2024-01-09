@@ -1,22 +1,31 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import NavLinks from "@/app/ui/components/Sidebar/nav-links";
 import DarkModeToggle from "@/app/ui/components/Sidebar/DarkModeToggle";
+import { DarkModeContext } from "@/app/lib/DarkModeContext"; // Import the context
 
 export default function Sidebar() {
   const [isHovered, setIsHovered] = useState(false);
-  const [darkMode, setDarkMode] = useState(false);
+  const { darkMode, setDarkMode } = useContext(DarkModeContext); // Use the context
 
   useEffect(() => {
-    const darkModeMediaQuery = window.matchMedia(
-      "(prefers-color-scheme: dark)"
-    );
+    const darkModeMediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
     setDarkMode(darkModeMediaQuery.matches);
-    darkModeMediaQuery.addEventListener("change", (event) => {
+
+    // Define the type of event parameter as MediaQueryListEvent
+    const mediaQueryListener = (event: MediaQueryListEvent) => {
       setDarkMode(event.matches);
-    });
-  }, []);
+    };
+
+    darkModeMediaQuery.addEventListener("change", mediaQueryListener);
+
+    return () => {
+      // Clean up the listener when the component unmounts
+      darkModeMediaQuery.removeEventListener("change", mediaQueryListener);
+    };
+  }, [setDarkMode]);
+
 
   return (
     <div

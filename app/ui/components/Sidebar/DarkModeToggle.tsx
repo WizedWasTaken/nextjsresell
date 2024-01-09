@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { DarkModeContext } from "@/app/ui/DarkModeContext";
+import { DarkModeContext } from "@/app/lib/DarkModeContext";
 import { MoonIcon, SunIcon } from "@heroicons/react/solid";
 
 export default function DarkModeToggle() {
