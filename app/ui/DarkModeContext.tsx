@@ -1,13 +1,15 @@
-// DarkModeContext.tsx
 import { createContext, useState, useEffect } from "react";
-import { DarkModeContextType } from "@/app/lib/definitions";
+import {
+  DarkModeContextType,
+  DarkModeProviderProps,
+} from "@/app/lib/definitions";
 
 export const DarkModeContext = createContext<DarkModeContextType>({
   darkMode: false,
   setDarkMode: (mode: boolean) => {},
 });
 
-export function DarkModeProvider({ children }) {
+export function DarkModeProvider({ children }: DarkModeProviderProps) {
   const [darkMode, setDarkMode] = useState(false);
 
   useEffect(() => {

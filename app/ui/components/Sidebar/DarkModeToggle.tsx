@@ -1,13 +1,6 @@
-// ui/DarkModeToggle.tsx
-import { createContext, useState, useEffect } from "react";
 import { useContext } from "react";
 import { DarkModeContext } from "@/app/ui/DarkModeContext";
 import { MoonIcon, SunIcon } from "@heroicons/react/solid";
-
-export const DarkModeContext = createContext<DarkModeContextType>({
-  darkMode: false,
-  setDarkMode: (mode: boolean) => {},
-});
 
 export default function DarkModeToggle() {
   const { darkMode, setDarkMode } = useContext(DarkModeContext);
