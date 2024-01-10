@@ -1,14 +1,15 @@
-import { ReactNode } from "react";
+import React, { ReactNode } from "react";
 
 export type NavLinkProps = {
   isHovered: boolean;
 };
 
-export interface DarkModeProviderProps {
-  children: ReactNode;
+export interface LayoutProps {
+  children: React.ReactNode;
 }
+export type SetDarkModeFunction = (mode: boolean) => void;
 
-export interface DarkModeContextType {
+export type DarkModeContextType = {
   darkMode: boolean;
-  setDarkMode: (mode: boolean) => void;
-}
+  setDarkMode: React.Dispatch<React.SetStateAction<boolean>>;
+};

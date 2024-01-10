@@ -1,29 +1,23 @@
-import { useContext } from "react";
-import { DarkModeContext } from "@/app/lib/DarkModeContext";
-import { MoonIcon, SunIcon } from "@heroicons/react/solid";
+import React, { useContext } from "react";
+import DarkModeContext from "@/app/lib/DarkMode/DarkModeContext";
 
-export default function DarkModeToggle() {
-  const { darkMode, setDarkMode } = useContext(DarkModeContext);
-
-  const handleClick = () => {
-    console.log("Button clicked");
-    console.log("Current darkMode value:", darkMode);
-    setDarkMode(!darkMode);
-    console.log("New darkMode value:", !darkMode);
-  };
+const DarkModeToggle: React.FC = () => {
+  const { darkMode, toggleDarkMode } = useContext(DarkModeContext);
 
   return (
-    <button
-      className={`transition-all duration-200 ease-in-out ${
-        darkMode ? "bg-white text-black" : "bg-black text-white"
-      } rounded-full p-2`}
-      onClick={handleClick}
+    <label
+      onClick={toggleDarkMode}
+      className="dark-mode-toggle switch cursor-pointer inline-flex items-center justify-between w-16 h-8 p-1 rounded-full transition-colors duration-500"
+      style={{ background: darkMode ? "#111827" : "#FBBF24" }}
     >
-      {darkMode ? (
-        <SunIcon className="h-5 w-5 transition-transform duration-200 transform rotate-180" />
-      ) : (
-        <MoonIcon className="h-5 w-5 transition-transform duration-200" />
-      )}
-    </button>
+      <span className="text-lg">{darkMode ? "🌙" : ""}</span>
+      <span
+        className="dot absolute w-6 h-6 bg-white rounded-full shadow-md transform transition-transform duration-300"
+        style={{ transform: darkMode ? "translateX(100%)" : "translateX(0)" }}
+      />
+      <span className="text-lg">{darkMode ? "" : "🌞"}</span>
+    </label>
   );
-}
+};
+
+export default DarkModeToggle;
